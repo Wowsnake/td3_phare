@@ -1,9 +1,22 @@
 package com.example.td_phare.dummy;
 
+import android.util.Log;
+
+import com.example.td_phare.MainActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -23,14 +36,14 @@ public class DummyContent {
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    private static final int COUNT = 25;
-
-    static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
-    }
+//    private static final int COUNT = 25;
+//
+//    static {
+//        // Add some sample items.
+//        for (int i = 1; i <= COUNT; i++) {
+//            addItem(createDummyItem(i));
+//        }
+//    }
 
     private static void addItem(DummyItem item) {
         ITEMS.add(item);
@@ -64,9 +77,46 @@ public class DummyContent {
             this.details = details;
         }
 
-        @Override
-        public String toString() {
-            return content;
+    }
+
+
+    public static void loadPhareJson() {
+        try {
+            String str = loadStrJson();
+            JSONObject jObjConnection = null;
+            jObjConnection = new JSONObject(str);
+            JSONObject jsonBix = jObjConnection.getJSONObject("phare");
+            JSONArray jsonA = jsonBix.getJSONArray("liste");
+
+            for (int i = 0; i < jsonA.length(); i++) {
+                JSONObject msg = (JSONObject) jsonA.get(i);
+                addItem(new DummyItem(
+                        msg.getString("id"),
+                        msg.getString("name"),
+                        msg.getString("region")
+                ));
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
+
+
+    public static String loadStrJson() {
+        String str = null;
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(MainActivity.getContext().getAssets().open("Phare.json")));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                sb.append(line + "\n");
+            }
+            str = new String(sb.toString());
+            Log.d("MainActivity", "str");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 }

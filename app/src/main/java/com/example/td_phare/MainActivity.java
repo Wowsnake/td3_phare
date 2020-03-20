@@ -27,19 +27,24 @@ import android.view.Menu;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ItemFragment.OnListFragmentInteractionListener {
 
-    static Context context ;
+    static Context context;
 
-    static Context getContext(){
-        return getContext();
+    public static Context getContext()
+    {
+        return context;
     }
+
 
     final static String TAG="MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         context = getApplicationContext();
-        loadJson();
+
+        DummyContent.loadPhareJson();
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -50,11 +55,6 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-    }
-
-    private void loadJson() {
-        
     }
 
     @Override
@@ -100,14 +100,9 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
         } else if (id == R.id.nav_send) {
             fragmentManager.beginTransaction().replace(R.id.main, new ItemFragment()).commit();
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -119,4 +114,7 @@ public class MainActivity extends AppCompatActivity
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
     }
+
+
+
 }
