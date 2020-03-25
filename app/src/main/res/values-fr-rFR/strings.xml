@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Phare</string>
+    <string name="navigation_drawer_open">Ouvrir  navigation</string>
+    <string name="navigation_drawer_close">Fermer navigation</string>
+    <string name="nav_header_title">Steffen ALVAREZ</string>
+    <string name="nav_header_subtitle">steffen.alvarez@etu.univ-amu.fr</string>
+    <string name="nav_header_desc">en-tête de navigation</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_gallery">gallerie</string>
+    <string name="menu_slideshow">Diaporamas</string>
+    <string name="menu_tools">Outils</string>
+    <string name="menu_share">Partager</string>
+    <string name="menu_list">liste</string>
+    <string name="menu_home">Menu principal</string>
+</resources>
