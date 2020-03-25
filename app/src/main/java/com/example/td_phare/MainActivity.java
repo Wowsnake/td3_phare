@@ -5,9 +5,11 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.example.td_phare.dummy.DummyContent;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.provider.MediaStore;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -100,10 +102,17 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
+            fragmentManager.beginTransaction().replace(R.id.main, new MapFragment()).commit();
+
         } else if (id == R.id.nav_send) {
+
             fragmentManager.beginTransaction().replace(R.id.main, new ItemFragment()).commit();
 
-        }
+        } //else if (id == R.id.video) {
+
+        //fragmentManager.beginTransaction().replace(R.id.main, new Video()).commit();
+
+   // }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
